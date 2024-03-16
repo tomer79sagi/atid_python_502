@@ -8,6 +8,7 @@ str_to_encrypt = 'Hi, my name is Tomer Sagi';
 
 # 2. Key must be 8 bytes
 key = get_random_bytes(8)
+print(f'Key: {key}')
 
 # 3. Create a DES cipher object
 cipher = DES.new(key, DES.MODE_ECB)
@@ -23,17 +24,20 @@ print(str_bins)
 
 # 4. Pad data to be a multiple of 16 bytes
 padded_data = pad(data, DES.block_size)
+print(padded_data)
 
 # 5. Encrypt - Data must be a multiple of 8 bytes
 encrypted_data = cipher.encrypt(padded_data)
-
-print("Encrypted (hex):", binascii.hexlify(encrypted_data))
+print(f'Encrypted: {encrypted_data}')
+# print("Encrypted (hex):", binascii.hexlify(encrypted_data))
 
 # 6. Decrypt
 decrypted_padded_data = cipher.decrypt(encrypted_data)
+print(f'Decrypted (padded): {decrypted_padded_data}')
 
 # 7. Unpad decrypted data to retrieve the original
 decrypted_data = unpad(decrypted_padded_data, DES.block_size)
+print(f'Decrypted (upadded): {decrypted_data}')
 
 # 8. Decode
-print("Decrypted:", decrypted_data.decode())
+print("Decoded:", decrypted_data.decode())
